@@ -1,0 +1,28 @@
+@mixin button-base {
+  display: inline-block;
+  border: none;
+  appearance: none;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
+}
+
+.add-button {
+  @include button-base;
+  background: #000000;
+  color: #FFFFFF;
+  border: 1px solid black;
+  border-radius: .25rem;
+}
+
+.cancel-button {
+  @include button-base;
+  color: #000000;
+  background: #FFFFFF;
+  border: 1px solid black;
+  border-radius: .25rem;
+}
