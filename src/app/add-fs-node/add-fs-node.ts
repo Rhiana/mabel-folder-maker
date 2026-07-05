@@ -7,18 +7,18 @@ import { NodeModel, NodeType } from '../node/node.model';
   imports: [FormField],
   template: `
     <section>
-      @if (this.folderModel().type === unsetType) {
+      @if (this.nodeModel().type === unsetType) {
         <div class="type-buttons">
-          <button type="button" (click)="setNewFormType(folderType)">Folder</button>
-          <button type="button" (click)="setNewFormType(fileType)">File</button>
+          <button type="button" (click)="setNewModelType(folderType)">Folder</button>
+          <button type="button" (click)="setNewModelType(fileType)">File</button>
         </div>
       }
       @else {
         <form class="add-fs-form">
-          @if (this.folderModel().type === folderType) {
+          @if (this.nodeModel().type === folderType) {
             <img src="assets/images/folder-open-regular.svg" alt="Folder" height="25px" width="25px" />
           }
-          @if (this.folderModel().type === fileType) {
+          @if (this.nodeModel().type === fileType) {
             <img src="assets/images/file-regular.svg" alt="File" height="25px" width="25px" />
           }
           <input
@@ -62,27 +62,27 @@ export class AddFsNode {
 
   initType = input<NodeType>(NodeType.unset);
 
-  folderModel = signal<NodeModel>({
+  nodeModel = signal<NodeModel>({
     type: NodeType.unset,
     name: '',
     children: [],
     id: '1'
   })
 
-  folderForm = form(this.folderModel);
+  folderForm = form(this.nodeModel);
 
   ngOnInit() {
     if (this.initType() != NodeType.unset) {
-      this.folderModel().type = this.initType()
+      this.nodeModel().type = this.initType()
     }
   }
 
-  setNewFormType(newType: NodeType) {
-    this.folderModel().type = newType
+  setNewModelType(newType: NodeType) {
+    this.nodeModel().type = newType
   }
 
   saveForm() {
-    this.rootFolder()?.push(this.folderModel())
+    this.rootFolder()?.push(this.nodeModel())
     this.toggleForm.emit(false)
   }
 

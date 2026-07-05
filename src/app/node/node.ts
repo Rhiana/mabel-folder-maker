@@ -26,7 +26,7 @@ import { AddFsNode } from "../add-fs-node/add-fs-node";
       }
     </div>
 
-    @if (showAddFolderForm()) {
+    @if (showAddFsNodeForm()) {
       <app-add-fs-node
         [rootFolder]="childFolder()"
         (toggleForm)="toggleForm($event)"
@@ -57,9 +57,9 @@ export class Node {
 
   initType = input<NodeType>(NodeType.unset);
 
-  showAddFolderForm = signal(false)
+  showAddFsNodeForm = signal(false)
 
   toggleForm(value: boolean) {
-    this.showAddFolderForm.set(value)
+    this.showAddFsNodeForm.set(value)
   }
 }

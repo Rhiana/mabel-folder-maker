@@ -21,7 +21,7 @@ import { Node } from "../node/node";
         } @empty {}
       </ul>
 
-      @if (showAddFolderForm()) {
+      @if (showAddFsNodeForm()) {
         <app-add-fs-node
           [rootFolder]="rootFolder()"
           (toggleForm)="toggleForm($event)"
@@ -37,11 +37,11 @@ export class AddRoot {
 
   rootFolder = signal<NodeModel[]>([])
 
-  showAddFolderForm = signal(false)
+  showAddFsNodeForm = signal(false)
 
   initType = signal<NodeType>(NodeType.unset)
 
   toggleForm(value: boolean) {
-    this.showAddFolderForm.set(value)
+    this.showAddFsNodeForm.set(value)
   }
 }
