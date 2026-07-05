@@ -9,11 +9,9 @@ import { Node } from "../node/node";
   imports: [AddFolder, Node],
   template: `
     <section>
-      <form>
-        <button class="add-button" type="button" (click)="toggleForm(true)">
-          Add folder to root
-        </button>
-      </form>
+      <button class="add-button" type="button" (click)="toggleForm(true)">
+        Add folder to root
+      </button>
 
       <ul class="folder-list">
         @for (node of rootFolder(); track node) {
