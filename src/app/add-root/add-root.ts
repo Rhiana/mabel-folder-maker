@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { signal } from '@angular/core';
-import { AddFolder } from '../add-folder/add-folder';
+import { AddFsNode } from '../add-fs-node/add-fs-node';
 import { NodeModel, NodeType } from '../node/node.model';
 import { Node } from "../node/node";
 
 @Component({
   selector: 'app-add-root',
-  imports: [AddFolder, Node],
+  imports: [AddFsNode, Node],
   template: `
     <section>
       <button class="add-button" type="button" (click)="toggleForm(true)">
@@ -22,7 +22,7 @@ import { Node } from "../node/node";
       </ul>
 
       @if (showAddFolderForm()) {
-        <app-add-folder
+        <app-add-fs-node
           [rootFolder]="rootFolder()"
           (toggleForm)="toggleForm($event)"
           [initType]="folderType"

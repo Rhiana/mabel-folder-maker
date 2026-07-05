@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddFolder } from './add-folder';
+import { AddFsNode } from './add-fs-node';
 
-describe('AddFolder', () => {
-  let component: AddFolder;
-  let fixture: ComponentFixture<AddFolder>;
+describe('AddFsNode', () => {
+  let component: AddFsNode;
+  let fixture: ComponentFixture<AddFsNode>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddFolder],
+      imports: [AddFsNode],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddFolder);
+    fixture = TestBed.createComponent(AddFsNode);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

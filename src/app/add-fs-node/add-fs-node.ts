@@ -3,7 +3,7 @@ import { form, FormField } from '@angular/forms/signals';
 import { NodeModel, NodeType } from '../node/node.model';
 
 @Component({
-  selector: 'app-add-folder',
+  selector: 'app-add-fs-node',
   imports: [FormField],
   template: `
     <section>
@@ -14,7 +14,7 @@ import { NodeModel, NodeType } from '../node/node.model';
         </div>
       }
       @else {
-        <form class="add-folder-form">
+        <form class="add-fs-form">
           @if (this.folderModel().type === folderType) {
             <img src="assets/images/folder-open-regular.svg" alt="Folder" height="25px" width="25px" />
           }
@@ -47,9 +47,9 @@ import { NodeModel, NodeType } from '../node/node.model';
       }
     </section>
   `,
-  styleUrl: './add-folder.scss',
+  styleUrl: './add-fs-node.scss',
 })
-export class AddFolder {
+export class AddFsNode {
   readonly folderType = NodeType.folder
 
   readonly fileType = NodeType.file

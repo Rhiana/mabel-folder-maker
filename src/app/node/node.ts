@@ -1,10 +1,10 @@
 import { Component, input, signal } from '@angular/core';
 import { NodeModel, NodeType } from './node.model';
-import { AddFolder } from "../add-folder/add-folder";
+import { AddFsNode } from "../add-fs-node/add-fs-node";
 
 @Component({
   selector: 'app-node',
-  imports: [AddFolder],
+  imports: [AddFsNode],
   template: `
     <div class="node-item">
       @if (node()?.type === folderType) {
@@ -27,7 +27,7 @@ import { AddFolder } from "../add-folder/add-folder";
     </div>
 
     @if (showAddFolderForm()) {
-      <app-add-folder
+      <app-add-fs-node
         [rootFolder]="childFolder()"
         (toggleForm)="toggleForm($event)"
         [initType]="unsetType"
