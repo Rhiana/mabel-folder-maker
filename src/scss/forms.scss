@@ -15,7 +15,7 @@
   @include button-base;
   background: #000000;
   color: #FFFFFF;
-  border: 1px solid black;
+  border: 1px solid #000000;
   border-radius: .25rem;
 }
 
@@ -23,6 +23,16 @@
   @include button-base;
   color: #000000;
   background: #FFFFFF;
-  border: 1px solid black;
+  border: 1px solid #000000;
   border-radius: .25rem;
+}
+
+input[type=text] {
+  font-size: 1rem;
+  border: 1px solid #000000;
+
+  &:focus {
+    border-color: #ffa500;
+    outline: #ffa500;
+  }
 }
