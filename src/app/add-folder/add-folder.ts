@@ -1,6 +1,6 @@
 import { Component, input, output, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { NodeModel } from '../node/node.model';
+import { NodeModel, NodeType } from '../node/node.model';
 
 @Component({
   selector: 'app-add-folder',
@@ -41,8 +41,10 @@ export class AddFolder {
 
   toggleForm = output<boolean>();
 
+  formType = input<NodeType>;
+
   folderModel = signal<NodeModel>({
-    type: 'folder',
+    type: this.formType,
     name: '',
     children: [],
     id: '1'

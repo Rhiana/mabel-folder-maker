@@ -1,5 +1,5 @@
 import { Component, input, signal } from '@angular/core';
-import { NodeModel } from './node.model';
+import { NodeModel, NodeType } from './node.model';
 import { AddFolder } from "../add-folder/add-folder";
 
 @Component({
@@ -7,14 +7,14 @@ import { AddFolder } from "../add-folder/add-folder";
   imports: [AddFolder],
   template: `
     <div class="node-item">
-      @if (node()?.type === 'folder') {
+      @if (node()?.type === folderType) {
         <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
       }
-      @if (node()?.type === 'file') {
+      @if (node()?.type === fileType) {
         <img src="assets/images/file-regular.svg" alt="File" height="20px" width="20px" />
       }
       <span>{{ node()?.name }}</span>
-      @if (node()?.type === 'folder') {
+      @if (node()?.type === folderType) {
         <button
           class="add-button"
           type="button"
@@ -44,6 +44,10 @@ import { AddFolder } from "../add-folder/add-folder";
   styleUrl: './node.scss',
 })
 export class Node {
+  readonly folderType = NodeType.folder
+
+  readonly fileType = NodeType.file
+
   node = input<NodeModel>();
 
   childFolder = signal<NodeModel[]>([])

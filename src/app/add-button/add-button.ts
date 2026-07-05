@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { signal } from '@angular/core';
 import { AddFolder } from '../add-folder/add-folder';
-import { NodeModel } from '../node/node.model';
+import { NodeModel, NodeType } from '../node/node.model';
 import { Node } from "../node/node";
 
 @Component({
@@ -27,7 +27,7 @@ import { Node } from "../node/node";
         <app-add-folder
           [rootFolder]="rootFolder()"
           (toggleForm)="toggleForm($event)"
-
+          [formType]="folderType"
         />
       }
     </section>
@@ -38,6 +38,10 @@ export class AddButton {
   rootFolder = signal<NodeModel[]>([])
 
   showAddFolderForm = signal(false)
+
+  formType = signal<NodeType>(NodeType.unset)
+
+  readonly folderType = NodeType.folder
 
   toggleForm(value: boolean) {
     this.showAddFolderForm.set(value)
