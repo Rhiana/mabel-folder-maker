@@ -1,11 +1,12 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { NodeModel } from './node.model';
+import { AddFolder } from "../add-folder/add-folder";
 
 @Component({
   selector: 'app-node',
-  imports: [],
+  imports: [AddFolder],
   template: `
-    <div>
+    <div class="node-item">
       @if (node()?.type === 'folder') {
         <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
       }
@@ -18,40 +19,38 @@ import { NodeModel } from './node.model';
           class="add-button"
           type="button"
           aria-label="Add new"
-          /* (click)="toggleForm(true)" */
+          (click)="toggleForm(true)"
         >
           <i class="bx bx-plus-big"></i>
         </button>
       }
     </div>
+
+    @if (showAddFolderForm()) {
+      <app-add-folder
+        [rootFolder]="childFolder()"
+        (toggleForm)="toggleForm($event)"
+      />
+    }
+
+    <ul>
+      @for (node of childFolder(); track node) {
+        <li>
+          <app-node [node]="node" />
+        </li>
+      } @empty {}
+    </ul>
   `,
-  styles: `
-    div {
-      display: inline-flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0.25rem;
-      border: 1px solid transparent;
-      &:hover {
-        border-color: #000;
-        .add-button {
-          display: block;
-          border-radius: 100%;
-          margin-left: .25rem;
-          i {
-            margin-top: 2px;
-          }
-        }
-      }
-    }
-    img {
-      margin-right: .25rem;
-    }
-    .add-button {
-      display: none;
-    }
-  `,
+  styleUrl: './node.scss',
 })
 export class Node {
   node = input<NodeModel>();
+
+  childFolder = signal<NodeModel[]>([])
+
+  showAddFolderForm = signal(false)
+
+  toggleForm(value: boolean) {
+    this.showAddFolderForm.set(value)
+  }
 }
