@@ -1,6 +1,6 @@
-export class NodeModel {
+export interface NodeModel {
   type: 'folder' | 'file' | 'unset' | null;
-  name?: string;
+  name: string;
   children?: NodeModel[];
   id: string;
 }
