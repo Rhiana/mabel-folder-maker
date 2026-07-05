@@ -2,3 +2,19 @@
   font-size: 1.25rem;
   padding: .5rem .75rem;
 }
+
+.folder-list {
+  margin: 1rem 0;
+  list-style-type: square;
+  padding-left: 1rem;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+      margin-right: .25rem;
+    }
+  }
+}

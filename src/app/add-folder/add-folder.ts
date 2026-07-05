@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { NodeModel } from '../node/node.model';
 
@@ -34,21 +34,13 @@ import { NodeModel } from '../node/node.model';
           </button>
         </form>
       }
-      @if (showFormName()) {
-        <ul class="folder-list">
-          <li>
-            <div class="folder-list__item">
-              <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
-              <span>{{ folderForm.name().value() }}</span>
-            </div>
-          </li>
-        </ul>
-      }
     </section>
   `,
   styleUrl: './add-folder.scss',
 })
 export class AddFolder {
+  rootFolder = input<NodeModel[]>();
+
   folderModel = signal<NodeModel>({
     type: 'folder',
     name: '',
@@ -58,11 +50,10 @@ export class AddFolder {
 
   folderForm = form(this.folderModel);
 
-  showFormName = signal(false)
   showFolderForm = signal(true)
 
   saveForm() {
-    this.showFormName.set(true)
+    this.rootFolder()?.push(this.folderModel())
     this.showFolderForm.set(false)
   }
 
