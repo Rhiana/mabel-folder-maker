@@ -7,36 +7,44 @@ import { NodeModel, NodeType } from '../node/node.model';
   imports: [FormField],
   template: `
     <section>
-      <form class="add-folder-form">
-        @if (this.formType() === folderType) {
-          <img src="assets/images/folder-open-regular.svg" alt="" height="25px" width="25px" />
-        }
-        @if (this.formType() === fileType) {
-          <img src="assets/images/file-regular.svg" alt="" height="25px" width="25px" />
-        }
-        <input
-          type="text"
-          aria-label="Folder name"
-          placeholder="Folder name"
-          [formField]="folderForm.name"
-        />
-        <button
-          class="add-button"
-          type="button"
-          aria-label="Save"
-          (click)="saveForm()"
-        >
-          <i class="bx bx-check"></i>
-        </button>
-        <button
-          class="cancel-button"
-          type="button"
-          aria-label="Cancel"
-          (click)="cancelForm()"
-        >
-          <i class="bx bx-x"></i>
-        </button>
-      </form>
+      @if (this.folderModel().type === unsetType) {
+        <div class="type-buttons">
+          <button type="button" (click)="setNewFormType(folderType)">Folder</button>
+          <button type="button" (click)="setNewFormType(fileType)">File</button>
+        </div>
+      }
+      @else {
+        <form class="add-folder-form">
+          @if (this.folderModel().type === folderType) {
+            <img src="assets/images/folder-open-regular.svg" alt="Folder" height="25px" width="25px" />
+          }
+          @if (this.folderModel().type === fileType) {
+            <img src="assets/images/file-regular.svg" alt="File" height="25px" width="25px" />
+          }
+          <input
+            type="text"
+            aria-label="name"
+            placeholder="Name"
+            [formField]="folderForm.name"
+          />
+          <button
+            class="add-button"
+            type="button"
+            aria-label="Save"
+            (click)="saveForm()"
+          >
+            <i class="bx bx-check"></i>
+          </button>
+          <button
+            class="cancel-button"
+            type="button"
+            aria-label="Cancel"
+            (click)="cancelForm()"
+          >
+            <i class="bx bx-x"></i>
+          </button>
+        </form>
+      }
     </section>
   `,
   styleUrl: './add-folder.scss',
@@ -46,14 +54,16 @@ export class AddFolder {
 
   readonly fileType = NodeType.file
 
+  readonly unsetType = NodeType.unset
+
   rootFolder = input<NodeModel[]>();
 
   toggleForm = output<boolean>();
 
-  formType = input<NodeType>(NodeType.unset);
+  initType = input<NodeType>(NodeType.unset);
 
   folderModel = signal<NodeModel>({
-    type: this.formType(),
+    type: NodeType.unset,
     name: '',
     children: [],
     id: '1'
@@ -61,8 +71,17 @@ export class AddFolder {
 
   folderForm = form(this.folderModel);
 
+  ngOnInit() {
+    if (this.initType() != NodeType.unset) {
+      this.folderModel().type = this.initType()
+    }
+  }
+
+  setNewFormType(newType: NodeType) {
+    this.folderModel().type = newType
+  }
+
   saveForm() {
-    this.folderModel().type = this.formType()
     this.rootFolder()?.push(this.folderModel())
     this.toggleForm.emit(false)
   }

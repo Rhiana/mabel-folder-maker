@@ -25,7 +25,7 @@ import { Node } from "../node/node";
         <app-add-folder
           [rootFolder]="rootFolder()"
           (toggleForm)="toggleForm($event)"
-          [formType]="folderType"
+          [initType]="folderType"
         />
       }
     </section>
@@ -39,7 +39,7 @@ export class AddButton {
 
   showAddFolderForm = signal(false)
 
-  formType = signal<NodeType>(NodeType.unset)
+  initType = signal<NodeType>(NodeType.unset)
 
   toggleForm(value: boolean) {
     this.showAddFolderForm.set(value)
