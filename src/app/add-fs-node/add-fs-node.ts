@@ -25,7 +25,7 @@ import { NodeModel, NodeType } from '../node/node.model';
             type="text"
             aria-label="name"
             placeholder="Name"
-            [formField]="folderForm.name"
+            [formField]="fsNodeForm.name"
           />
           <button
             class="add-button"
@@ -71,7 +71,7 @@ export class AddFsNode {
     id: '1'
   })
 
-  folderForm = form(this.nodeModel);
+  fsNodeForm = form(this.nodeModel);
 
   ngOnInit() {
     if (this.initType() != NodeType.unset) {
