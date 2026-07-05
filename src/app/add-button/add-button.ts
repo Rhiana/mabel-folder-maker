@@ -10,7 +10,7 @@ import { Node } from "../node/node";
   template: `
     <section>
       <form>
-        <button class="add-button" type="button" (click)="toggleForm()">
+        <button class="add-button" type="button" (click)="toggleForm(true)">
           Add folder to root
         </button>
       </form>
@@ -26,7 +26,11 @@ import { Node } from "../node/node";
       </ul>
 
       @if (showAddFolderForm()) {
-        <app-add-folder [rootFolder]="rootFolder()" />
+        <app-add-folder
+          [rootFolder]="rootFolder()"
+          (toggleForm)="toggleForm($event)"
+
+        />
       }
     </section>
   `,
@@ -37,11 +41,7 @@ export class AddButton {
 
   showAddFolderForm = signal(false)
 
-  toggleForm() {
-    if (this.showAddFolderForm() === true) {
-      this.showAddFolderForm.set(false)
-    } else {
-      this.showAddFolderForm.set(true)
-    }
+  toggleForm(value: boolean) {
+    this.showAddFolderForm.set(value)
   }
 }
