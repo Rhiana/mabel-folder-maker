@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Folder } from './folder/folder';
+import { AddButton } from './add-button/add-button';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Folder],
+  imports: [RouterOutlet, AddButton],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

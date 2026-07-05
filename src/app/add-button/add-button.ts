@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { AddFolder } from '../add-folder/add-folder';
 
 @Component({
-  selector: 'app-folder',
+  selector: 'app-add-button',
   imports: [AddFolder],
-  templateUrl: './folder.html',
-  styleUrl: './folder.scss',
+  templateUrl: './add-button.html',
+  styleUrl: './add-button.scss',
 })
-export class Folder { }
+export class AddButton { }
