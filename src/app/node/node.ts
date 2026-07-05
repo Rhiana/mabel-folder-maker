@@ -5,11 +5,24 @@ import { NodeModel } from './node.model';
   selector: 'app-node',
   imports: [],
   template: `
-    <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
-    <span>{{ folder()?.name }}</span>
+    <div>
+      @if (node()?.type === 'folder') {
+        <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
+      }
+      <span>{{ node()?.name }}</span>
+    </div>
   `,
-  styleUrl: './node.scss',
+  styles: `
+    div {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    img {
+      margin-right: .25rem;
+    }
+  `,
 })
 export class Node {
-  folder = input<NodeModel>();
+  node = input<NodeModel>();
 }

@@ -16,9 +16,9 @@ import { Node } from "../node/node";
       </form>
 
       <ul class="folder-list">
-        @for (folder of rootFolder(); track folder) {
+        @for (node of rootFolder(); track node) {
           <li>
-            <app-node [folder]="folder" />
+            <app-node [node]="node" />
           </li>
         } @empty {
           <li>There are no folders.</li>
