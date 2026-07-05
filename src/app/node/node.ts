@@ -24,6 +24,7 @@ import { AddFsNode } from "../add-fs-node/add-fs-node";
           <i class="bx bx-plus-big"></i>
         </button>
       }
+      <!-- ToDo: Add delete button here, would this need the unique Id??? -->
     </div>
 
     @if (showAddFsNodeForm()) {

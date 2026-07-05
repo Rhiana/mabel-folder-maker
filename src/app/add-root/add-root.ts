@@ -14,6 +14,9 @@ import { Node } from "../node/node";
         Add folder to root
       </button>
 
+      <!-- ToDo: Could this be refactored?
+          This is very similar to what's in the node component. So could just call node.
+          Could fix the JSON bug below. -->
       <ul class="node-list">
         @for (node of rootFolder(); track node) {
           <li>
@@ -30,6 +33,7 @@ import { Node } from "../node/node";
         />
       }
     </section>
+    <!-- ToDo: Bug here, it's only showing the root folders, not the whole tree -->
     <pre>
       {{ this.rootFolder() | json }}
     </pre>

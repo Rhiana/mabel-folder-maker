@@ -62,6 +62,8 @@ export class AddFsNode {
 
   initType = input<NodeType>(NodeType.unset);
 
+  // TODO: Add validation for name, only has to exist
+  // TODO: Make the id's unique, does Angular have a unique variable like ember does??
   nodeModel = signal<NodeModel>({
     type: NodeType.unset,
     name: '',
