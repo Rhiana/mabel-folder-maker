@@ -8,7 +8,12 @@ import { NodeModel, NodeType } from '../node/node.model';
   template: `
     <section>
       <form class="add-folder-form">
-        <img src="assets/images/folder-open-regular.svg" alt="" height="25px" width="25px" />
+        @if (this.formType() === folderType) {
+          <img src="assets/images/folder-open-regular.svg" alt="" height="25px" width="25px" />
+        }
+        @if (this.formType() === fileType) {
+          <img src="assets/images/file-regular.svg" alt="" height="25px" width="25px" />
+        }
         <input
           type="text"
           aria-label="Folder name"
@@ -37,14 +42,18 @@ import { NodeModel, NodeType } from '../node/node.model';
   styleUrl: './add-folder.scss',
 })
 export class AddFolder {
+  readonly folderType = NodeType.folder
+
+  readonly fileType = NodeType.file
+
   rootFolder = input<NodeModel[]>();
 
   toggleForm = output<boolean>();
 
-  formType = input<NodeType>;
+  formType = input<NodeType>(NodeType.unset);
 
   folderModel = signal<NodeModel>({
-    type: this.formType,
+    type: this.formType(),
     name: '',
     children: [],
     id: '1'
@@ -53,6 +62,7 @@ export class AddFolder {
   folderForm = form(this.folderModel);
 
   saveForm() {
+    this.folderModel().type = this.formType()
     this.rootFolder()?.push(this.folderModel())
     this.toggleForm.emit(false)
   }

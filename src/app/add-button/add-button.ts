@@ -18,9 +18,7 @@ import { Node } from "../node/node";
           <li>
             <app-node [node]="node" />
           </li>
-        } @empty {
-          <li>There are no folders.</li>
-        }
+        } @empty {}
       </ul>
 
       @if (showAddFolderForm()) {
@@ -35,13 +33,13 @@ import { Node } from "../node/node";
   styleUrl: './add-button.scss',
 })
 export class AddButton {
+  readonly folderType = NodeType.folder
+
   rootFolder = signal<NodeModel[]>([])
 
   showAddFolderForm = signal(false)
 
   formType = signal<NodeType>(NodeType.unset)
-
-  readonly folderType = NodeType.folder
 
   toggleForm(value: boolean) {
     this.showAddFolderForm.set(value)

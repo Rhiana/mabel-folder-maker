@@ -30,6 +30,7 @@ import { AddFolder } from "../add-folder/add-folder";
       <app-add-folder
         [rootFolder]="childFolder()"
         (toggleForm)="toggleForm($event)"
+        [formType]="fileType"
       />
     }
 
@@ -51,6 +52,8 @@ export class Node {
   node = input<NodeModel>();
 
   childFolder = signal<NodeModel[]>([])
+
+  formType = input<NodeType>(NodeType.unset);
 
   showAddFolderForm = signal(false)
 
