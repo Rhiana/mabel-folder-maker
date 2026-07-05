@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { signal } from '@angular/core';
 import { AddFolder } from '../add-folder/add-folder';
 import { NodeModel } from '../node/node.model';
+import { Node } from "../node/node";
 
 @Component({
   selector: 'app-add-button',
-  imports: [AddFolder],
+  imports: [AddFolder, Node],
   template: `
     <section>
       <form>
@@ -17,10 +18,7 @@ import { NodeModel } from '../node/node.model';
       <ul class="folder-list">
         @for (folder of rootFolder(); track folder) {
           <li>
-            <div class="folder-list__item">
-              <img src="assets/images/folder-open-regular.svg" alt="Folder" height="20px" width="20px" />
-              <span>{{ folder.name }}</span>
-            </div>
+            <app-node [folder]="folder" />
           </li>
         } @empty {
           <li>There are no folders.</li>
