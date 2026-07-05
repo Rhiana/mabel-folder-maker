@@ -5,7 +5,7 @@ import { NodeModel, NodeType } from '../node/node.model';
 import { Node } from "../node/node";
 
 @Component({
-  selector: 'app-add-button',
+  selector: 'app-add-root',
   imports: [AddFolder, Node],
   template: `
     <section>
@@ -13,7 +13,7 @@ import { Node } from "../node/node";
         Add folder to root
       </button>
 
-      <ul class="folder-list">
+      <ul class="node-list">
         @for (node of rootFolder(); track node) {
           <li>
             <app-node [node]="node" />
@@ -30,9 +30,9 @@ import { Node } from "../node/node";
       }
     </section>
   `,
-  styleUrl: './add-button.scss',
+  styleUrl: './add-root.scss',
 })
-export class AddButton {
+export class AddRoot {
   readonly folderType = NodeType.folder
 
   rootFolder = signal<NodeModel[]>([])
