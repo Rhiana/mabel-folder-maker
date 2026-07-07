@@ -29,14 +29,14 @@ import { AddFsNode } from "../add-fs-node/add-fs-node";
 
     @if (showAddFsNodeForm()) {
       <app-add-fs-node
-        [rootFolder]="childFolder()"
+        [rootFolder]="node()?.children"
         (toggleForm)="toggleForm($event)"
         [initType]="unsetType"
       />
     }
 
     <ul>
-      @for (node of childFolder(); track node) {
+      @for (node of node()?.children; track node) {
         <li>
           <app-node [node]="node" />
         </li>
@@ -53,8 +53,6 @@ export class Node {
   readonly unsetType = NodeType.unset
 
   node = input<NodeModel>();
-
-  childFolder = signal<NodeModel[]>([])
 
   initType = input<NodeType>(NodeType.unset);
 

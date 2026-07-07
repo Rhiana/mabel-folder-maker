@@ -5,6 +5,6 @@ export enum NodeType {
 export interface NodeModel {
   type: NodeType;
   name: string;
-  children?: NodeModel[];
+  children: NodeModel[];
   id: string;
 }
